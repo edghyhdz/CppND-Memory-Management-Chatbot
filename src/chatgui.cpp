@@ -6,6 +6,9 @@
 #include "chatlogic.h"
 #include "chatgui.h"
 
+// reference debug 
+// https://stackoverflow.com/questions/4551696/no-debugging-symbols-found-in-gdb-debugger
+
 // size of chatbot window
 const int width = 414;
 const int height = 736;

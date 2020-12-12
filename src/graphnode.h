@@ -15,6 +15,7 @@ private:
     //// STUDENT CODE
     ////
 
+    // TODO: ChildEdges are owned -> change to unique_ptr as well?
     // data handles (owned)
     std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
 

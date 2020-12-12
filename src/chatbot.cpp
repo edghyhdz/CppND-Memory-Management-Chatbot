@@ -93,8 +93,10 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
   // loop over all edges and keywords and compute Levenshtein distance to query
   typedef std::pair<GraphEdge *, int> EdgeDist;
   std::vector<EdgeDist> levDists; // format is <ptr,levDist>
-
+  std::cout <<"Goes here before breaking?\n "; 
   for (size_t i = 0; i < _currentNode->GetNumberOfChildEdges(); ++i) {
+    std::cout <<"Iteration started?\n "; 
+
     GraphEdge *edge = _currentNode->GetChildEdgeAtIndex(i);
     for (auto keyword : edge->GetKeywords()) {
       EdgeDist ed{edge, ComputeLevenshteinDistance(keyword, message)};
@@ -123,8 +125,9 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
 
 void ChatBot::SetCurrentNode(GraphNode *node) {
   // update pointer to current node
+  std::cout << "Selecting a random answer with: " << node->GetID() << std::endl; 
   _currentNode = node;
-
+  std::cout << "Selecting a random answer with: " << node->GetID() << std::endl; 
   // select a random node answer (if several answers should exist)
   std::vector<std::string> answers = _currentNode->GetAnswers();
   std::mt19937 generator(int(std::time(0)));
