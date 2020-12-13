@@ -51,6 +51,7 @@ ChatBot::ChatBot(const ChatBot &source) { // Copy constructor
   std::cout << "Copying image of instance " << &source << " to instance "
             << this << std::endl;
 }
+
 ChatBot &ChatBot::operator=(const ChatBot &source){
   std::cout << "Assigning image of instance " << &source << " to instance "
             << this << std::endl;
@@ -61,6 +62,11 @@ ChatBot &ChatBot::operator=(const ChatBot &source){
   _filename = source._filename; 
   _image = new wxBitmap(_filename, wxBITMAP_TYPE_PNG);
   *_image = *source._image;
+
+  _currentNode = source._currentNode;
+  _chatLogic = source._chatLogic;
+  _chatLogic->SetChatbotHandle(this);
+
   return *this;
 
 } // Copy assignment operator
@@ -70,19 +76,43 @@ ChatBot::ChatBot(ChatBot &&source) {
             << std::endl;
   _filename = source._filename;
   _image = source._image;
+  _chatLogic = source._chatLogic;
+  _rootNode = source._rootNode;
+  _currentNode = source._currentNode;
+  std::cout << "Image address: " << &_image << std::endl; 
+  _chatLogic->SetChatbotHandle(this);
+
   source._image = NULL;
+  source._chatLogic = nullptr;
+  source._rootNode = nullptr;
+  source._currentNode = nullptr;
+
 } // Move constructor
-
+  // Rereference from knowledge.udacity
+  // https://knowledge.udacity.com/questions/131653 -> to find out error with move constructor and move assignment operator 
 ChatBot &ChatBot::operator=(ChatBot &&source) {
-
   std::cout << "Moving (Assigning) image of instance " << &source
-            << " to instance "; 
+            << " to instance " << this << std::endl; 
   if (this == &source) {
     return *this;
   }
   delete _image;
+  
   _image = source._image;
+  _chatLogic = source._chatLogic;
+  _rootNode = source._rootNode;
+  _currentNode = source._currentNode;
+
+  std::cout << "This one triggers the assigining operator\n";
+  _chatLogic->SetChatbotHandle(this);
+  std::cout << "After set chat bot handle\n";
+  
   source._image = NULL;
+  source._chatLogic = nullptr;
+  source._rootNode = nullptr;
+  source._currentNode = nullptr;
+
+
   return *this;
 } // Move assignment operator
 

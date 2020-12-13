@@ -32,7 +32,8 @@ public:
   // TODO: Task 2: Rule of 5
   //// STUDENT CODE
   ////
-
+  // Rereference from knowledge.udacity
+  // https://knowledge.udacity.com/questions/131653 -> to find out error with move constructor and move assignment operator 
   // Move constructor and move assignment constructor
   // and copy assignment constructors
   ChatBot &operator=(const ChatBot &source); // Copy assignment operator
@@ -48,7 +49,7 @@ public:
 
 
   void SetCurrentNode(GraphNode *node);
-  void SetRootNode(GraphNode *rootNode) {std::cout<< "Setting root node\n" ;_rootNode = rootNode; }
+  void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
   void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
   wxBitmap *GetImageHandle() { return _image; }
 
